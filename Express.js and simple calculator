@@ -1,0 +1,58 @@
+const express = require("express");
+const app = express();
+const bodyParser= require("body-parser");
+
+app.use(bodyParser.urlencoded({extended:true}));
+
+app.get("/",function(req,res){
+     res.send("server running successfully!!!");
+});
+
+app.get("/about",function(req,res){
+    res.send("wecome to about us page");
+})
+
+app.get("/calculator",function(req,res){
+    res.sendFile(__dirname+"/index.html");
+});
+
+app.post("/calculator",function(req,res){
+    let n1=Number(req.body.v1);
+    let n2=Number(req.body.v2);
+    n1=n1+n2;
+    res.send('sum of two no is :'+n1);
+})
+
+app.listen(3000,function(req,res){
+     console.log("server is running!!");
+});
+
+
+
+================================================================================
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+    <style> 
+        *{font-family: 'Open Sans', sans-serif;}
+        div{height: 60vh;display: flex; justify-content: center; align-items: center; flex-direction: column; text-align: center;margin-right: 10%;}
+    </style>
+</head>
+<body>
+    <div class="centerdiv">
+        <h1>Simple Calculator</h1>
+        <br>
+        <form method="POST">
+            <input type="text" name="v1" placeholder="enter your number.">
+            <br>
+            <input type="text" name="v2" placeholder="enter you number.">
+            <br>
+            <button type="submit">Calculate</button>
+        </form>
+   </div>
+</body>
+</html>
